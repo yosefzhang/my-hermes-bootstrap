@@ -1,0 +1,11 @@
+# Local secrets
+my-hermes-bootstrap.env
+
+# Local runtime outputs
+SOUL.md
+*.bak
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
