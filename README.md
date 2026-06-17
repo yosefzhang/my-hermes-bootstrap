@@ -5,12 +5,17 @@
 ## 仓库内容
 
 - `SKILL.md`：完整的 Hermes Bootstrap 技能说明，包含恢复流程和执行约束。
-- `reference/env-template.md`：环境变量模板，用于生成本地配置文件。
+- `reference/env-template.md`：环境变量模板，定义所有必需的配置字段。
+- `script/generate_bootstrap_env.py`：环境变量生成脚本，从现有的 `~/.hermes/.env` 自动提取模板所需字段并生成 `my-hermes-bootstrap.env`。
 
 ## 使用方式
 
 1. 阅读 `SKILL.md`，确认恢复流程和高风险操作。
-2. 参考 `reference/env-template.md`，在仓库根目录创建本地文件 `my-hermes-bootstrap.env` 并填入真实配置。
+2. 使用 `generate_bootstrap_env.py` 脚本从现有环境生成配置文件：
+   - 默认用法：`python script/generate_bootstrap_env.py` — 从 `~/.hermes/.env` 读取，输出到仓库根目录的 `my-hermes-bootstrap.env`
+   - 自定义源文件：`python script/generate_bootstrap_env.py --source <path-to-env-file>`
+   - 自定义输出位置：`python script/generate_bootstrap_env.py --output <target-path>`
+   - 脚本会自动保留模板中的注释和结构，只覆盖源文件中存在的键
 3. 按 `SKILL.md` 中的顺序执行环境恢复，包括代理、模型、消息渠道、外部记忆、Skill 和插件安装。
 4. 执行 `hermes doctor` 做最终验证。
 

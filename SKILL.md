@@ -152,7 +152,7 @@ hermes config set openviking.user "$OPENVIKING_USER"
 hermes config set openviking.agent "$OPENVIKING_AGENT"
 ```
 
-### Step 10: 安装 Skill
+### Step 11: 安装 Skill
 
 [ ] 检查 `GITHUB_TOKEN` 是否生效，是否能正常访问Github API（如 `curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/rate_limit` 返回正常结果）
 
@@ -212,4 +212,4 @@ curl -fsSL https://opencode.ai/install | bash
 2. 验证安装成功：`opencode --version`
 
 ## 参考文件
-- `references/env-template.md` — 环境变量模板
+- `reference/env-template.md` — 环境变量模板

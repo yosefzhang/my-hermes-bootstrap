@@ -1,11 +1,36 @@
 # Local secrets
 my-hermes-bootstrap.env
+.env
+.env.local
+*.secret
+*.key
 
 # Local runtime outputs
 SOUL.md
 *.bak
 
+# Test files and sample data
+test/
+tests/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
 # OS/editor noise
 .DS_Store
 Thumbs.db
 .vscode/
+.idea/
+*.swp
+*.swo
+*~
