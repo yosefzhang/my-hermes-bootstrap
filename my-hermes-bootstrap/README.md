@@ -4,14 +4,21 @@
 
 ## 仓库内容
 
-- `SKILL.md`：完整的 Hermes Bootstrap 技能说明，包含恢复流程和执行约束。
-- `reference/env-template.md`：环境变量模板，定义所有必需的配置字段。
-- `script/generate_bootstrap_env.py`：环境变量生成脚本，从现有的 `~/.hermes/.env` 自动提取模板所需字段并生成 `my-hermes-bootstrap.env`。
+- `SKILL.md`：完整的 Hermes Bootstrap 技能说明，包含执行流程和执行约束。
+- `my-hermes-bootstrap.env`：当前环境的实际配置文件快照（由脚本生成）。
+- `my-hermes-bootstrap.env.template`：环境变量模板（纯 .env 格式），内含默认值，可手动复制编辑。
+- `resource/`：Hermes 未安装时的回退来源，包含 `.env` 和 `config.yaml` 两份参考文件。
+- `script/generate_bootstrap_env.py`：环境变量生成脚本，自动从 Hermes 安装目录（`~/.hermes/.env` + `~/.hermes/config.yaml`）提取配置，Hermes 未安装时回退到 `resource/`。
 
 ## 使用前必读
 该 `SKILL.md` 中包含高风险操作，可能修改 Hermes Agent 的基础配置并破坏原有配置，请慎重使用。
 
-详细阅读 `SKILL.md`，确认恢复流程和高风险操作。根据你的需求，可修改 `SKILL.md` 让 AI 执行，或者手动执行。
+**安全说明：**
+- `my-hermes-bootstrap.env` 是本地生成的快照，可能包含真实 API Key/Secret/环境地址，已被 `.gitignore` 排除，**禁止提交**。
+- `resource/.env` 与 `resource/config.yaml` 是回退参考文件，**不应包含真实凭据**，目前已清空为占位值。
+- 已确认 Git 历史中没有提交过包含敏感数据的 `.env` 或 `config.yaml` 文件。
+
+详细阅读 `SKILL.md`，确认执行流程和高风险操作。根据你的需求，可修改 `SKILL.md` 让 AI 执行，或者手动执行。
 
 **备份！备份！备份！**
 
@@ -23,23 +30,23 @@ hermes update --backup
 
 ## 使用方式
 
-### Step 1: 阅读 `SKILL.md`，确认恢复流程和高风险操作。
+### Step 1: 阅读 `SKILL.md`，确认执行流程和高风险操作。
 ### Step 2: 配置 env
 
 #### 从模板生成新的 env
-根据模板 `./reference/env-template.md` 生成 `./my-hermes-bootstrap.env`，并手动填入参数。
+根据模板 `./my-hermes-bootstrap.env.template` 生成 `./my-hermes-bootstrap.env`，并手动填入参数。
 
 #### 从已有的 Hermes Agent 提取 env
 
 **默认使用:**
-从 `~/.hermes/.env` 读取，输出到仓库根目录的 `my-hermes-bootstrap.env`
+自动检测 Hermes 安装目录（`~/.hermes/.env` + `~/.hermes/config.yaml`），未安装则回退到 `resource/`。输出到仓库根目录的 `my-hermes-bootstrap.env`：
 ```bash
 python script/generate_bootstrap_env.py
 ```
 
 **自定义输入输出:**
 ```bash
-python script/generate_bootstrap_env.py --source <path-to-env-file> --output <target-path>
+python script/generate_bootstrap_env.py --source <env-path> --config <config-path> --output <target-path>
 ```
 
 ### Step 3: 执行

@@ -1,0 +1,76 @@
+# ─────────────────────────────────────────────────────────────
+# My Hermes Bootstrap — Git Ignore
+# ─────────────────────────────────────────────────────────────
+
+# Generated Hermes bootstrap snapshot — contains real secrets
+my-hermes-bootstrap.env
+
+# Fallback reference files — keep real credentials out; stored locally only
+resource/
+
+# ── Python ───────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+dmypy.json
+.pytype/
+.pyre/
+coverage.xml
+*.cover
+.hypothesis/
+.nox/
+.tox/
+*.log
+
+# ── Virtual environments ─────────────────────────────────────
+.env/
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# ── IDEs / Editors ───────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+# ── OS files ─────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── Secrets (safety net) ─────────────────────────────────────
+*.pem
+*.key
+*.crt
+*.p12
+secrets/
+secrets.*
+.env*.local
