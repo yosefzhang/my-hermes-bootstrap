@@ -3,6 +3,12 @@
 复制此文件为 `my-hermes-bootstrap.env`，填入实际值。
 
 ```env
+# ── 代理（按需启用） ──
+HTTP_PROXY=
+HTTPS_PROXY=
+ALL_PROXY=
+NO_PROXY=localhost,127.0.0.1,::1
+
 # ── 模型 API Key ──
 DEEPSEEK_API_KEY=
 OPENROUTER_API_KEY=

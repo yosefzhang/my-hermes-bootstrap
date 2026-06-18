@@ -4,6 +4,14 @@ import argparse
 from pathlib import Path
 
 
+PROXY_KEY_ALIASES: dict[str, tuple[str, ...]] = {
+    "HTTP_PROXY": ("HTTP_PROXY", "http_proxy"),
+    "HTTPS_PROXY": ("HTTPS_PROXY", "https_proxy"),
+    "ALL_PROXY": ("ALL_PROXY", "all_proxy"),
+    "NO_PROXY": ("NO_PROXY", "no_proxy"),
+}
+
+
 def parse_env_file(env_path: Path) -> dict[str, str]:
     values: dict[str, str] = {}
 
@@ -45,7 +53,11 @@ def render_template(template_path: Path, env_values: dict[str, str]) -> str:
             continue
 
         key, default_value = raw_line.split("=", 1)
-        value = env_values.get(key, default_value)
+        value = default_value
+        for alias in PROXY_KEY_ALIASES.get(key, (key,)):
+            if alias in env_values:
+                value = env_values[alias]
+                break
         output_lines.append(f"{key}={value}")
 
     return "\n".join(output_lines).rstrip() + "\n"
